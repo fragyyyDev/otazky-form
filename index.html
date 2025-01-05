@@ -21,7 +21,7 @@
             </select>
 
             <label for="otazka">Otazka: </label>
-            <input type="text" placeholder="Otázka" name="otazka" id="otazka">
+            <input type="text" placeholder="Otázka" name="otazka" id="otazka" onchange="changeQuestion(this.value)">
 
 
             <label for="predmet">Předmět </label>
@@ -45,10 +45,9 @@
             <div class="" id="abcd">
                 <div class="flex flex-col space-y-4 bg-gray-300 p-4">
                     <label for="ABCD-input">Přidávání odpovědí</label>
-                    <input type="text" placeholder="Odpověď" id="ABCD-input"> 
+                    <input type="text" placeholder="Odpověď" id="ABCD-input">
                     <label for="ABCD-checkbox">Je tato odpověď správná?</label>
-                    <input type="checkbox" name="ABCD-checkbox"
-                        id="ABCD-checkbox">
+                    <input type="checkbox" name="ABCD-checkbox" id="ABCD-checkbox">
                     <p>Správné odpovědi :</p>
                     <ul id="ABCD-ul"></ul>
                     <button class="bg-white mt-2" onclick="addABCDanswer()">
@@ -70,11 +69,14 @@
 
             <div class="" id="bool" style="display: none;">
                 <p>Co bude správně</p>
-                <input type="checkbox" name="ano" id=""> <label for="ano">ANO</label>
-                <input type="checkbox" name="ne" id=""> <label for="ne">NE</label>
+                <input type="checkbox" name="bool_checkbox" id="bool_checkbox" onchange="addBooleanAnswer()"> <label for="bool_checkbox">Bude ANO správná odpověď 
+                    Nebo NE ?
+                </label>
             </div>
 
-            <button class="p-4 bg-gray-400 rounded-lg">Odeslat celou otázku</button>
+            <button class="p-4 bg-gray-400 rounded-lg" onclick="exportToJSON()">Odeslat celou otázku</button>
+
+            <p id="json-output"></p>
         </div>
     </div>
     <script src="script.js"></script>

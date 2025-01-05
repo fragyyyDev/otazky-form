@@ -4,6 +4,7 @@ const boolForm = document.getElementById("bool");
 
 const hints = [];
 let answer_type = "abcd";
+let question = "";
 let subject = "Český Jazyk";
 const alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 const answers = [];
@@ -66,13 +67,13 @@ const addABCDanswer = () => {
   answers.push({
     letter: alphabet[answers.length],
     answer: answerValue,
-    status: answerIsCorrect,
+    status: answerIsCorrect ? "correct" : "wrong",
   });
   answerInput.value = "";
   const answerList = document.getElementById("ABCD-ul");
   const answerItem = document.createElement("li");
   answerItem.textContent = `${alphabet[answers.length - 1]}: ${answerValue} (${
-    answerIsCorrect ? "correct" : "incorrect"
+    answerIsCorrect ? "correct" : "wrong"
   })`;
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
@@ -89,34 +90,74 @@ const addABCDanswer = () => {
 };
 
 const addFreeAnswer = () => {
-    const freeAnswerInput = document.getElementById("free_input");
-    const freeAnswerValue = freeAnswerInput.value;
-    answers.push(freeAnswerValue)
-    freeAnswerInput.value = "";
-    const freeAnswerList = document.getElementById("free-ul");
-    const freeAnswerItem = document.createElement("li");
-    freeAnswerItem.textContent = freeAnswerValue;
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.style.marginLeft = "10px";
-    deleteButton.style.backgroundColor = "red";
-    deleteButton.style.color = "white";
-    deleteButton.style.padding = "5px";
-    deleteButton.addEventListener("click", () => {
-      answers.splice(answers.length - 1, 1);
-      freeAnswerList.removeChild(freeAnswerItem);
-    });
-    freeAnswerItem.appendChild(deleteButton);
-    freeAnswerList.appendChild(freeAnswerItem);
-};  
+  const freeAnswerInput = document.getElementById("free_input");
+  const freeAnswerValue = freeAnswerInput.value;
+  answers.push(freeAnswerValue);
+  freeAnswerInput.value = "";
+  const freeAnswerList = document.getElementById("free-ul");
+  const freeAnswerItem = document.createElement("li");
+  freeAnswerItem.textContent = freeAnswerValue;
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.style.marginLeft = "10px";
+  deleteButton.style.backgroundColor = "red";
+  deleteButton.style.color = "white";
+  deleteButton.style.padding = "5px";
+  deleteButton.addEventListener("click", () => {
+    answers.splice(answers.length - 1, 1);
+    freeAnswerList.removeChild(freeAnswerItem);
+  });
+  freeAnswerItem.appendChild(deleteButton);
+  freeAnswerList.appendChild(freeAnswerItem);
+};
 
 const changeSubject = (value) => {
-  switch(value) {
+  switch (value) {
     case "Matematika":
-        subject = "Matematika";
-        break;
+      subject = "Matematika";
+      break;
     case "Český Jazyk":
-        subject = "Český Jazyk";
-        break;
+      subject = "Český Jazyk";
+      break;
   }
-}
+};
+
+const changeQuestion = (value) => {
+  question = value;
+};
+
+const addBooleanAnswer = () => {
+  const booleanAnswerInput = document.getElementById("bool_checkbox");
+  const booleanAnswerValue = booleanAnswerInput.checked;
+  answers.push(
+    { answer: "Ano", status: booleanAnswerValue ? "correct" : "wrong" },
+    { answer: "Ne", status: booleanAnswerValue ? "wrong" : "correct" }
+  );
+};
+
+
+const exportToJSON = () => {
+    // Validate that necessary fields are filled
+    if (!question.trim()) {
+      alert("Please enter a question before exporting.");
+      return;
+    }
+  
+    const _id = Math.floor(Math.random() * 10000);
+  
+    const data = [
+      {
+        "_id": _id,
+        "subject": subject,
+        "question": question,
+        "answer_type": answer_type,
+        "answers": answers,
+        "hints": hints,
+        "tags": [],
+      }
+    ];
+  
+    const jsonString = JSON.stringify(data, null, 2);
+    const outputElement = document.getElementById("json-output");
+    outputElement.textContent = jsonString;
+  };
