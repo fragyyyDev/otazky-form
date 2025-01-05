@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex  items-center justify-center w-screen h-screen  bg-gray-200 ">
+        <div class="flex flex-col space-y-4">
+            <h1 class="text-3xl font-bold">Otázkomet 5000</h1>
+
+            <label for="typ">Typ otázky: </label>
+            <select name="" id="" name="typ" onchange="changeVisibility(this.value)">
+                <option value="ABCD">ABCD</option>
+                <option value="FREE">FREE INPUT</option>
+                <option value="BOOL">ANO / NE</option>
+            </select>
+
+            <label for="otazka">Otazka: </label>
+            <input type="text" placeholder="Otázka" name="otazka" id="otazka">
+
+
+            <label for="predmet">Předmět </label>
+            <select name="predmet" id="" onchange="changeSubject(this.value)">
+                <option value="Český Jazyk">Český Jazyk</option>
+                <option value="Matematika">Matematika</option>
+            </select>
+
+            <label for="napovedy">Nápovědy </label>
+            <input type="text" placeholder="Nápovědy" name="napovedy" id="napoveda">
+            <ul id="napovedy-ul"></ul>
+            <button class="bg-white" onclick="addHint()">Odeslat nápovědu</button>
+
+            <label for="tagy">Tagy </label>
+            <select name="tagy" id="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+
+            <!-- ABCD -->
+            <div class="" id="abcd">
+                <div class="flex flex-col space-y-4 bg-gray-300 p-4">
+                    <label for="ABCD-input">Přidávání odpovědí</label>
+                    <input type="text" placeholder="Odpověď" id="ABCD-input"> 
+                    <label for="ABCD-checkbox">Je tato odpověď správná?</label>
+                    <input type="checkbox" name="ABCD-checkbox"
+                        id="ABCD-checkbox">
+                    <p>Správné odpovědi :</p>
+                    <ul id="ABCD-ul"></ul>
+                    <button class="bg-white mt-2" onclick="addABCDanswer()">
+                        Přidat odpověď
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- FREE -->
+            <div class="bg-gray-300 p-4" id="free" style="display: none;">
+                <input type="text" id="free_input" placeholder="Odpověď">
+                <button class="bg-white" onclick="addFreeAnswer()">Odeslat odpověď</button>
+                <p>Správné odpověďi</p>
+                <ul id="free-ul"></ul>
+            </div>
+
+            <!-- BOOL -->
+
+            <div class="" id="bool" style="display: none;">
+                <p>Co bude správně</p>
+                <input type="checkbox" name="ano" id=""> <label for="ano">ANO</label>
+                <input type="checkbox" name="ne" id=""> <label for="ne">NE</label>
+            </div>
+
+            <button class="p-4 bg-gray-400 rounded-lg">Odeslat celou otázku</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
