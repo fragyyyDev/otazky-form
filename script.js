@@ -8,6 +8,7 @@ let question = "";
 let subject = "Český Jazyk";
 const alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 const answers = [];
+let tags = [];
 
 const changeVisibility = (value) => {
   switch (value) {
@@ -135,9 +136,29 @@ const addBooleanAnswer = () => {
   );
 };
 
+const addTag = () => {
+    const tagInput = document.getElementById("tag_input");
+    const tagValue = tagInput.value
+    tags.push(tagValue);
+    const tagList = document.getElementById("tagy-ul");
+    const tagItem = document.createElement("li");
+    tagItem.textContent = tagValue;
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.style.marginLeft = "10px";
+    deleteButton.style.backgroundColor = "red";
+    deleteButton.style.color = "white";
+    deleteButton.style.padding = "5px";
+    deleteButton.addEventListener("click", () => {
+      tagList.removeChild(tagItem);
+    });
+    tagItem.appendChild(deleteButton);
+    tagList.appendChild(tagItem);
+    tagInput.value = "";
+}
+
 
 const exportToJSON = () => {
-    // Validate that necessary fields are filled
     if (!question.trim()) {
       alert("Please enter a question before exporting.");
       return;
@@ -153,7 +174,7 @@ const exportToJSON = () => {
         "answer_type": answer_type,
         "answers": answers,
         "hints": hints,
-        "tags": [],
+        "tags": tags,
       }
     ];
   
