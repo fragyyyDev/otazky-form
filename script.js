@@ -5,6 +5,9 @@ const boolForm = document.getElementById("bool");
 const hints = [];
 let answer_type = "abcd";
 let question = "";
+let latex = "";
+let img = "";
+let cetba = "";
 let subject = "Český Jazyk";
 const alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 const answers = [];
@@ -126,6 +129,15 @@ const changeSubject = (value) => {
 const changeQuestion = (value) => {
   question = value;
 };
+const changeLatex = (value) => {
+  latex = value;
+};
+const changeImg = (value) => {
+  img = value;
+};
+const changeCetba = (value) => {
+  cetba = value;
+};
 
 const addBooleanAnswer = () => {
   const booleanAnswerInput = document.getElementById("bool_checkbox");
@@ -171,6 +183,9 @@ const exportToJSON = () => {
         "_id": _id,
         "subject": subject,
         "question": question,
+        "latex": latex,
+        "img": img,
+        "cetba": cetba,
         "answer_type": answer_type,
         "answers": answers,
         "hints": hints,
